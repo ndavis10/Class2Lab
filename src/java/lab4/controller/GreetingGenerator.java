@@ -3,22 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lab2.controller;
+package lab4.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lab4.model.WelcomeService;
 
 /**
  *
  * @author viewt_000
  */
-@WebServlet(name = "PageGenerator", urlPatterns = {"/pager"})
-public class PageGenerator extends HttpServlet {
+@WebServlet(name = "GreetingGenerator", urlPatterns = {"/Lab4/greeter"})
+public class GreetingGenerator extends HttpServlet {
+    
+    private static final String RESULT_PAGE = "result.jsp";
+    private static final String ERROR_PAGE = "~/error.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,41 +38,22 @@ public class PageGenerator extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Pager</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Pager at " + request.getContextPath() + "</h1>");
-            out.println("<div>");
-            out.println("<h3>It's a table</h3>");
-            out.println("<table>");
-            out.println("<tr>");
-            out.println("<th>Heading</th>");
-            out.println("<th>Heading</th>");
-            out.println("<th>Heading</th>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td>Data</td>");
-            out.println("<td>Data</td>");
-            out.println("<td>Data</td>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td>Data</td>");
-            out.println("<td>Data</td>");
-            out.println("<td>Data</td>");
-            out.println("</tr>");
-            out.println("</table>");
-            out.println("</div>");
-            out.println("</body>");
-            out.println("</html>");
+        WelcomeService welcome = new WelcomeService();
+        String name;
+        try
+        {
+            name = request.getParameter("name");
+            String result = welcome.getWelcome(name);
+            
+            request.setAttribute("greeting", result);
+            
+            RequestDispatcher view = request.getRequestDispatcher(RESULT_PAGE);
+            view.forward(request, response);
         }
         catch(Exception e)
         {
-            
+            RequestDispatcher view = request.getRequestDispatcher(ERROR_PAGE);
+            view.forward(request, response);
         }
     }
 

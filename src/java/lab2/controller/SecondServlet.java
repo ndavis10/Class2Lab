@@ -8,7 +8,6 @@ package lab2.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author viewt_000
  */
-@WebServlet(name = "PageGenerator", urlPatterns = {"/pager"})
-public class PageGenerator extends HttpServlet {
+public class SecondServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,36 +35,12 @@ public class PageGenerator extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Pager</title>");            
+            out.println("<title>Servlet SecondServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Pager at " + request.getContextPath() + "</h1>");
-            out.println("<div>");
-            out.println("<h3>It's a table</h3>");
-            out.println("<table>");
-            out.println("<tr>");
-            out.println("<th>Heading</th>");
-            out.println("<th>Heading</th>");
-            out.println("<th>Heading</th>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td>Data</td>");
-            out.println("<td>Data</td>");
-            out.println("<td>Data</td>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td>Data</td>");
-            out.println("<td>Data</td>");
-            out.println("<td>Data</td>");
-            out.println("</tr>");
-            out.println("</table>");
-            out.println("</div>");
+            out.println("<h1>Servlet SecondServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        }
-        catch(Exception e)
-        {
-            
         }
     }
 
