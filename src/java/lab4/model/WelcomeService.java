@@ -13,6 +13,8 @@ import java.util.Calendar;
  */
 public class WelcomeService {
     private Calendar today;
+    private static final int AFTERNOON = 12;
+    private static final int EVENING = 17;
     
     public WelcomeService()
     {
@@ -21,11 +23,11 @@ public class WelcomeService {
     
     public String getTimeOfDay()
     {
-        if(today.get(Calendar.HOUR_OF_DAY) >= 17)
+        if(today.get(Calendar.HOUR_OF_DAY) >= EVENING)
         {
             return "evening";
         }
-        else if(today.get(Calendar.HOUR_OF_DAY) >= 12)
+        else if(today.get(Calendar.HOUR_OF_DAY) >= AFTERNOON)
         {
             return "afternoon";
         }
